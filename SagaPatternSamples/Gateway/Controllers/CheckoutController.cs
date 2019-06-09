@@ -17,7 +17,7 @@ namespace Gateway.Controllers
     public class CheckoutController : ControllerBase
     {
 
-        const string ServiceBusConnectionString = "Endpoint=sb://srikssb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bVQQW4ryKmFti0GTbX5YLPEbcsuGZCREOiN9ocGrzR8=";
+        const string ServiceBusConnectionString = "";
         const string TopicName = "CreateOrder";
         static ITopicClient topicClient;
 

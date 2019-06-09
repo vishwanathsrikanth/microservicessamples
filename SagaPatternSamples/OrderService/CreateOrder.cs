@@ -12,7 +12,7 @@ namespace OrderService
 {
     public static class CreateOrder
     {
-        const string serviceBusConnectionString = "Endpoint=sb://srikssb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bVQQW4ryKmFti0GTbX5YLPEbcsuGZCREOiN9ocGrzR8=";
+        const string serviceBusConnectionString = "";
         const string cancelOrderTopicName = "CancelOrder";
         const string chargeAmountTopicName = "ChargeAmount";
         static ITopicClient cancelOrderTopicClient;

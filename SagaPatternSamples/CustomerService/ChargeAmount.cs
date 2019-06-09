@@ -11,7 +11,7 @@ namespace PaymentService
 {
     public static class ChargeAmount
     {
-        const string serviceBusConnectionString = "Endpoint=sb://srikssb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bVQQW4ryKmFti0GTbX5YLPEbcsuGZCREOiN9ocGrzR8=";
+        const string serviceBusConnectionString = "";
         const string cancelOrderTopicName = "CancelOrder";
         static ITopicClient cancelOrderTopicClient;
 
