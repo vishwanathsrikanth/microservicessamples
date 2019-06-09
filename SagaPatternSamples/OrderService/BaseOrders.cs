@@ -15,6 +15,7 @@ namespace OrderService
         {
             Orders = new List<OrderModel>();
             CancelledOrders = new List<CancelOrderModel>();
+            ConfirmedOrders = new List<OrderModel>();
         }
     }
 }

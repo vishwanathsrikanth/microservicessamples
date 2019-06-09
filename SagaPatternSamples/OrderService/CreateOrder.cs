@@ -13,12 +13,15 @@ namespace OrderService
     public static class CreateOrder
     {
         const string serviceBusConnectionString = "Endpoint=sb://srikssb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bVQQW4ryKmFti0GTbX5YLPEbcsuGZCREOiN9ocGrzR8=";
-        const string topicName = "CancelOrder";
-        static ITopicClient topicClient;
+        const string cancelOrderTopicName = "CancelOrder";
+        const string chargeAmountTopicName = "ChargeAmount";
+        static ITopicClient cancelOrderTopicClient;
+        static ITopicClient chargeAmountTopicClient;
 
         static CreateOrder()
         {
-            topicClient = new TopicClient(serviceBusConnectionString, topicName);
+            cancelOrderTopicClient = new TopicClient(serviceBusConnectionString, cancelOrderTopicName);
+            chargeAmountTopicClient = new TopicClient(serviceBusConnectionString, chargeAmountTopicName);
         }
 
         [FunctionName("CreateOrder")]
@@ -36,13 +39,16 @@ namespace OrderService
                 Quantity = checkOutProcessModel.Quantity,
                 ProductId = checkOutProcessModel.ProductId
             };
+            OrdersRepository.Orders.Add(order);
 
             // Order service allows orders only with quantity less than 10
             if (checkOutProcessModel.Quantity < 10)
             {
                 log.LogInformation($"Order Processed");
                 order.OrderId = Guid.NewGuid();
-                OrdersRepository.Orders.Add(order);
+                OrdersRepository.ConfirmedOrders.Add(order);
+                chargeAmountTopicClient.SendAsync(new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(order))))
+                    .GetAwaiter().GetResult();
             }
             else
             {
@@ -51,11 +57,9 @@ namespace OrderService
                 var messageBody = new CancelOrderModel();
                 messageBody.TrackingId = checkOutProcessModel.TrackingId;
                 messageBody.Message = "Order cannot be process as it exceeded maximum quantity of 10";
-                OrdersRepository.CancelledOrders.Add(messageBody);
-
                 var cancelOrderMessage = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(messageBody)));
                 // Send the message to the topic and assume it will be successfull - eventual consistency
-                topicClient.SendAsync(cancelOrderMessage).GetAwaiter().GetResult();
+                cancelOrderTopicClient.SendAsync(cancelOrderMessage).GetAwaiter().GetResult();
             }
         }
     }

@@ -26,7 +26,14 @@ namespace Models
     public class CancelOrderModel
     {
         public Guid TrackingId { get; set; }
-
         public string Message { get; set; }
     }
+
+    [Serializable]
+    public class CustomerAccountModel
+    {
+        public int CustomerId { get; set; }
+        public decimal MaximumOrderLimit { get; set; }
+    }
+
 }

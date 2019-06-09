@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleAPIApp", "Logging\Sam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway", "SagaPatternSamples\Gateway\Gateway.csproj", "{76F8D93D-4FF0-45C4-87FE-D98BBD769BF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService", "SagaPatternSamples\CustomerService\CustomerService.csproj", "{8CFE93B5-E471-4775-9707-62F5634C0A14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentService", "SagaPatternSamples\CustomerService\PaymentService.csproj", "{8CFE93B5-E471-4775-9707-62F5634C0A14}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "SagaPatternSamples\OrderService\OrderService.csproj", "{C11B2BD3-A6EB-473E-8790-7E9642CA8CD1}"
 EndProject
