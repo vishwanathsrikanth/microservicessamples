@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <ApplicationInsightsResourceId>/subscriptions/925a5ad8-a21a-48c0-92a2-5a8a2a4dfc46/resourcegroups/microservices-workbench/providers/microsoft.insights/components/MicroservicesSamples</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/925a5ad8-a21a-48c0-92a2-5a8a2a4dfc46/resourcegroups/microservices-workbench/providers/microsoft.insights/components/MicroservicesSamples</ApplicationInsightsAnnotationResourceId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="FunctionApp1\**" />
+    <Content Remove="FunctionApp1\**" />
+    <EmbeddedResource Remove="FunctionApp1\**" />
+    <None Remove="FunctionApp1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+</Project>

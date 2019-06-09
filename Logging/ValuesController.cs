@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace MicroservicesSamples
+namespace SampleAPIApp
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
@@ -20,9 +23,14 @@ namespace MicroservicesSamples
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<HttpResponseMessage> Get(int id)
         {
-            return "value";
+            var client = new HttpClient();
+            var uri = "https://apim-workbench.azure-api.net/FunctionApp120190531112311/Function1?name=sriks";
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+            httpRequestMessage.Headers.Add("Ocp-Apim-Subscription-Key", "6d7140fb933644cb8af003fec6f4acbf");
+            HttpResponseMessage response = await client.SendAsync(httpRequestMessage);
+            return response;
         }
 
         // POST api/<controller>
