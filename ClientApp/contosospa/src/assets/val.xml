@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_0zosxca" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.1.2">
+  <decision id="policyexecution" name="PolicyExecution">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="What is the category Type">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>categorytype</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1yi81x3" label="Data Classification">
+        <inputExpression id="LiteralExpression_0vikzh0" typeRef="string">
+          <text>dataclassification</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Risk Identified" name="riskid" typeRef="string" />
+      <output id="OutputClause_03rnup3" label="Control Identified" name="controlid" typeRef="string" />
+      <rule id="DecisionRule_0fhv127">
+        <inputEntry id="UnaryTests_0pv6gtm">
+          <text>"cloud"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kcdlff">
+          <text>"high"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hrybd0">
+          <text>"R1"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0alq23k">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wcmtoz">
+        <inputEntry id="UnaryTests_0s90lx6">
+          <text>"cloud"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cfgni4">
+          <text>"most confidential"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16ngsrk">
+          <text>"R5"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1rh0on1">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

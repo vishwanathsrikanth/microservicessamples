@@ -1,0 +1,21 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to Angular 7 Playground !
+  </h1>
+</div>
+<ul>
+    <div class="center" *ngIf="!isUserLoggedIn()">
+        <button (click)="login()">Login</button>
+        <button (click)="signup()">Sign Up</button>
+      </div>
+    
+      <div class="center" *ngIf="isUserLoggedIn()">
+        <h1>Welcome</h1>
+        <h4> {{useremail()}}</h4>
+        <button (click)="logout()">Logout</button>
+      </div>
+
+    <div class="canvas" style="width:100%;height:100%"></div>
+</ul>
+<router-outlet></router-outlet>
