@@ -332,7 +332,7 @@ module.exports = "a.navbar-brand {\r\n  white-space: normal;\r\n  text-align: ce
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header>\r\n  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>\r\n    <div class=\"container\">\r\n      <a class=\"navbar-brand\" [routerLink]='[\"/\"]'>ContosoWebProject</a>\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" aria-label=\"Toggle navigation\"\r\n        [attr.aria-expanded]=\"isExpanded\" (click)=\"toggle()\">\r\n        <span class=\"navbar-toggler-icon\"></span>\r\n      </button>\r\n      <div class=\"navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse\" [ngClass]='{\"show\": isExpanded}'>\r\n        <ul class=\"navbar-nav flex-grow\">\r\n          <li>\r\n            <div>Welcome {{user$}}</div>\r\n          </li>\r\n          <li class=\"nav-item\" [routerLinkActive]='[\"link-active\"]' [routerLinkActiveOptions]='{ exact: true }'>\r\n            <a class=\"nav-link text-dark\" [routerLink]='[\"/\"]'>Home</a>\r\n          </li>\r\n          <li class=\"nav-item\" [routerLinkActive]='[\"link-active\"]'>\r\n            <a class=\"nav-link text-dark\" [routerLink]='[\"/counter\"]'>Counter</a>\r\n          </li>\r\n          <li class=\"nav-item\" [routerLinkActive]='[\"link-active\"]'>\r\n            <a class=\"nav-link text-dark\" [routerLink]='[\"/fetch-data\"]'>Fetch data</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </nav>\r\n</header>\r\n"
+module.exports = "<header>\r\n  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>\r\n    <div class=\"container\">\r\n      <a class=\"navbar-brand\" [routerLink]='[\"/\"]'>ContosoWebProject</a>\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" aria-label=\"Toggle navigation\"\r\n        [attr.aria-expanded]=\"isExpanded\" (click)=\"toggle()\">\r\n        <span class=\"navbar-toggler-icon\"></span>\r\n      </button>\r\n      <div class=\"navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse\" [ngClass]='{\"show\": isExpanded}'>\r\n        <ul class=\"navbar-nav flex-grow\">\r\n          <li>\r\n            <div>Welcome {{ (user$ | async)?.name }}</div>\r\n          </li>\r\n          <li class=\"nav-item\" [routerLinkActive]='[\"link-active\"]' [routerLinkActiveOptions]='{ exact: true }'>\r\n            <a class=\"nav-link text-dark\" [routerLink]='[\"/\"]'>Home</a>\r\n          </li>\r\n          <li class=\"nav-item\" [routerLinkActive]='[\"link-active\"]'>\r\n            <a class=\"nav-link text-dark\" [routerLink]='[\"/counter\"]'>Counter</a>\r\n          </li>\r\n          <li class=\"nav-item\" [routerLinkActive]='[\"link-active\"]'>\r\n            <a class=\"nav-link text-dark\" [routerLink]='[\"/fetch-data\"]'>Fetch data</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </nav>\r\n</header>\r\n"
 
 /***/ }),
 
@@ -373,6 +373,7 @@ var NavMenuComponent = /** @class */ (function () {
     };
     NavMenuComponent.prototype.ngOnInit = function () {
         this._store.dispatch(new _store_actions_user_action__WEBPACK_IMPORTED_MODULE_5__["GetUser"]());
+        console.log(this.user$);
     };
     NavMenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -408,7 +409,7 @@ __webpack_require__.r(__webpack_exports__);
 var UserService = /** @class */ (function () {
     function UserService(_http) {
         this._http = _http;
-        this.usersUrl = '/session/user';
+        this.usersUrl = '/api/user/';
     }
     UserService.prototype.getUser = function () {
         return this._http.get(this.usersUrl);
@@ -428,22 +429,32 @@ var UserService = /** @class */ (function () {
 /*!**********************************************!*\
   !*** ./src/app/store/actions/user.action.ts ***!
   \**********************************************/
-/*! exports provided: EUserActions, GetUser */
+/*! exports provided: EUserActions, GetUser, GetUserSuccess */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EUserActions", function() { return EUserActions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetUser", function() { return GetUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetUserSuccess", function() { return GetUserSuccess; });
 var EUserActions;
 (function (EUserActions) {
     EUserActions["GetUser"] = "[User] Get User";
+    EUserActions["GetUserSuccess"] = "[User] Get User Success";
 })(EUserActions || (EUserActions = {}));
 var GetUser = /** @class */ (function () {
     function GetUser() {
         this.type = EUserActions.GetUser;
     }
     return GetUser;
+}());
+
+var GetUserSuccess = /** @class */ (function () {
+    function GetUserSuccess(user) {
+        this.user = user;
+        this.type = EUserActions.GetUserSuccess;
+    }
+    return GetUserSuccess;
 }());
 
 
@@ -464,8 +475,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
 /* harmony import */ var _actions_user_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/user.action */ "./src/app/store/actions/user.action.ts");
-/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/user.service */ "./src/app/services/user.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
 
 
 
@@ -477,7 +490,9 @@ var UserEffects = /** @class */ (function () {
         var _this = this;
         this._userservice = _userservice;
         this._action$ = _action$;
-        this.getUser$ = this._action$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_user_action__WEBPACK_IMPORTED_MODULE_3__["EUserActions"].GetUser), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function () { return _this._userservice.getUser(); }));
+        this.getUser$ = this._action$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_user_action__WEBPACK_IMPORTED_MODULE_3__["EUserActions"].GetUser), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["switchMap"])(function () { return _this._userservice.getUser(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["switchMap"])(function (user) {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(new _actions_user_action__WEBPACK_IMPORTED_MODULE_3__["GetUserSuccess"](user));
+        }));
     }
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Effect"])(),
@@ -485,7 +500,7 @@ var UserEffects = /** @class */ (function () {
     ], UserEffects.prototype, "getUser$", void 0);
     UserEffects = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"], _ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"], _ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"]])
     ], UserEffects);
     return UserEffects;
 }());
@@ -513,9 +528,10 @@ __webpack_require__.r(__webpack_exports__);
 var userReducers = function (state, action) {
     if (state === void 0) { state = _state_user_state__WEBPACK_IMPORTED_MODULE_1__["initialUserState"]; }
     switch (action.type) {
-        case _actions_user_action__WEBPACK_IMPORTED_MODULE_2__["EUserActions"].GetUser: {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+        case _actions_user_action__WEBPACK_IMPORTED_MODULE_2__["EUserActions"].GetUserSuccess: {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { user: action.user });
         }
+        default: return state;
     }
 };
 

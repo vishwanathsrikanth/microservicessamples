@@ -3,85 +3,48 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "skeleton": {
+    "WebApplication1": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "contoso",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        }
-      },
+      "prefix": "app",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "progress": true,
+            "extractCss": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "preserveSymlinks": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/content",
-              "src/assets/i18n",
-              {
-                "glob": "**/*",
-                "input": "src/i18n",
-                "output": "/i18n/"
-              }             
+              "src/assets"
             ],
-            "styles": [              
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true,
-            "lazyModules": [
-            ]
+            "scripts": []
           },
           "configurations": {
-            "local": {
-              "fileReplacements": []
-            },
-            "development": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/env-specific-imports.ts",
-                  "with": "src/environments/env-specific-imports.prod.ts"
-                }
-              ],
-              "i18nLocale": "en",
-              "optimization": true,
-              "outputHashing": "none",
-              "sourceMap": true,
-              "extractCss": false,
-              "namedChunks": true,
-              "aot": true,
-              "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": true
-            },
             "production": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/env-specific-imports.ts",
-                  "with": "src/environments/env-specific-imports.prod.ts"
                 }
               ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": true,
+              "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
+              "vendorChunk": false,
               "buildOptimizer": true
             }
           }
@@ -89,51 +52,77 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "skeleton:build"
+            "browserTarget": "WebApplication1:build"
           },
           "configurations": {
-            "local": {
-              "browserTarget": "skeleton:build:local"
-            },
-            "development": {
-              "browserTarget": "skeleton:build"
-            },
             "production": {
-              "browserTarget": "skeleton:build:production"
+              "browserTarget": "WebApplication1:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "skeleton:build"
+            "browserTarget": "WebApplication1:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "codeCoverage": true,
-            "sourceMap": true,
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [ "src/styles.scss" ],
+            "styles": [
+              "styles.css"
+            ],
             "scripts": [],
-            "assets": [ "src/favicon.ico", "src/assets" ],
-            "preserveSymlinks": true
+            "assets": [
+              "src/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist-server",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          },
+          "configurations": {
+            "dev": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": true
+            },
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            }
           }
         }
       }
     },
-    "skeleton-e2e": {
+    "WebApplication1-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -141,28 +130,20 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "skeleton:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "skeleton:serve:production"
-            }
+            "devServerTarget": "WebApplication1:serve"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "skeleton",
-  "cli": {
-    "warnings": {
-      "typescriptMismatch": false
-    }
-  }
+  "defaultProject": "WebApplication1"
 }

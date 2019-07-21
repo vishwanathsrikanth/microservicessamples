@@ -20,13 +20,6 @@ namespace ContosoWebProject.Controllers
 
         public AzureAdB2COptions AzureAdB2COptions { get; set; }
 
-        [Authorize]
-        [HttpGet]
-        public JsonResult GetUserDetails()
-        {
-            return new JsonResult(new { Id = "1", Name = "Sriks" });
-        }
-
         [HttpGet]
         public IActionResult SignIn()
         {

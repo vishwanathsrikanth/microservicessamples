@@ -27,6 +27,6 @@ export class NavMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._store.dispatch(new GetUser());
+      this._store.dispatch(new GetUser());
   }
 }
