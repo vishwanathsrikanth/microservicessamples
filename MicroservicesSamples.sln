@@ -19,7 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentService", "SagaPatte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "SagaPatternSamples\OrderService\OrderService.csproj", "{C11B2BD3-A6EB-473E-8790-7E9642CA8CD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "SagaPatternSamples\Models\Models.csproj", "{D30140B6-EEE3-4CAC-B6AA-93B8C6ACCE4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "SagaPatternSamples\Models\Models.csproj", "{D30140B6-EEE3-4CAC-B6AA-93B8C6ACCE4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "B2CSamples", "B2CSamples", "{AAE848C4-E9A1-446F-A775-6411BD092652}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoWebProject", "ClientApp\ContosoWebProject\ContosoWebProject.csproj", "{100253DF-4805-4340-B867-86487C5CDE96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoWebAPIProject", "ClientApp\ContosoWebAPIProject\ContosoWebAPIProject\ContosoWebAPIProject.csproj", "{85B2BE92-7F71-4ECA-9FBD-D751FF8D86BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +57,14 @@ Global
 		{D30140B6-EEE3-4CAC-B6AA-93B8C6ACCE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D30140B6-EEE3-4CAC-B6AA-93B8C6ACCE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D30140B6-EEE3-4CAC-B6AA-93B8C6ACCE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{100253DF-4805-4340-B867-86487C5CDE96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{100253DF-4805-4340-B867-86487C5CDE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{100253DF-4805-4340-B867-86487C5CDE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{100253DF-4805-4340-B867-86487C5CDE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85B2BE92-7F71-4ECA-9FBD-D751FF8D86BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85B2BE92-7F71-4ECA-9FBD-D751FF8D86BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85B2BE92-7F71-4ECA-9FBD-D751FF8D86BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85B2BE92-7F71-4ECA-9FBD-D751FF8D86BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +77,8 @@ Global
 		{8CFE93B5-E471-4775-9707-62F5634C0A14} = {F4F0040D-4378-4617-BCAE-FCD7815026E6}
 		{C11B2BD3-A6EB-473E-8790-7E9642CA8CD1} = {F4F0040D-4378-4617-BCAE-FCD7815026E6}
 		{D30140B6-EEE3-4CAC-B6AA-93B8C6ACCE4A} = {F4F0040D-4378-4617-BCAE-FCD7815026E6}
+		{100253DF-4805-4340-B867-86487C5CDE96} = {AAE848C4-E9A1-446F-A775-6411BD092652}
+		{85B2BE92-7F71-4ECA-9FBD-D751FF8D86BD} = {AAE848C4-E9A1-446F-A775-6411BD092652}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {268362C8-DC15-44D3-A9DF-DF3D9D5AC177}
